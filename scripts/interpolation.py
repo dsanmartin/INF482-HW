@@ -3,6 +3,7 @@ from numba import jit
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
+from scipy.spatial import distance_matrix
 
 def plot(X, Y, Z, p='3D'):
     fig = plt.figure(figsize=(12,8))
@@ -71,26 +72,30 @@ def createV(M):
         for j in range(M):
             V.append(np.array([v[i], v[j]]))            
     return np.array(V)
+
+def main():    
+    s = 2
+    N = 5
+    M = 50
+    U = np.random.rand(N, s+1)
+    X = U[:,:s]
+    Y = U[:,-1]
     
-s = 2
-N = 50
-M = 50
-U = np.random.rand(N, s+1)
-X = U[:,:s]
-Y = U[:,-1]
-
-V = createV(M)
-
-P = interpolate(X, Y, V)
-
-plot(X, Y, P.reshape(M,M).T, p='2D')
-
-## 1D
-#f = lambda x: np.sinc(x)
-#X = np.linspace(0, 1, N)
-#X = X.reshape(N, 1)
-#Y = f(X).reshape(N, 1)
-#V = np.linspace(0, 1, 100)
-#P = interpolate(X, Y, V)
-#plt.plot(X, Y, 'b*')
-#plt.plot(V, P)
+    print(distanceMatrix(X))
+    print(distance_matrix(X, X))
+    
+#    V = createV(M)
+#    P = interpolate(X, Y, V)
+#    plot(X, Y, P.reshape(M,M).T, p='2D')
+    
+    ## 1D
+    #f = lambda x: np.sinc(x)
+    #X = np.linspace(0, 1, N)
+    #X = X.reshape(N, 1)
+    #Y = f(X).reshape(N, 1)
+    #V = np.linspace(0, 1, 100)
+    #P = interpolate(X, Y, V)
+    #plt.plot(X, Y, 'b*')
+    #plt.plot(V, P)
+    
+main()
