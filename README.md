@@ -1,2 +1,2 @@
-# INF482-HW
-Homeworks - Applications of Numerical Methods
+# INF-482 Applications of Numerical Methods
+## Homeworks
